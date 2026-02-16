@@ -77,3 +77,38 @@ class StudentSerializer(serializers.ModelSerializer):
         model = Student
         fields = ['id', 'name', 'age', 'course']
 
+# ASSIGNMENT 3:
+![alt text](image-3.png)
+![alt text](image-4.png)
+
+app/views.py
+
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
+from .models import Student
+from .serializers import StudentSerializer
+
+
+@api_view(['GET', 'POST'])
+def student_list(request):
+
+    # 🔹 GET Method
+    if request.method == 'GET':
+        students = Student.objects.all()
+        serializer = StudentSerializer(students, many=True)
+        return Response(serializer.data)
+
+    # 🔹 POST Method
+    elif request.method == 'POST':
+        serializer = StudentSerializer(data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+app/serializer.py
+
+added one line at bottom: fields = '__all__'
