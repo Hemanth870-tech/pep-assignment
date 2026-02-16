@@ -133,6 +133,9 @@ class StudentSerializer(serializers.ModelSerializer):
         return value
 
 # ASSIGNMENT 5:
+<img width="1920" height="1008" alt="image" src="https://github.com/user-attachments/assets/e560e41a-fbd2-4ae8-bdbc-f300c0a6befd" />
+
+
 ![alt text](<Screenshot 2026-02-14 115145.png>)
 
 1. my-profile/polls/views.py
