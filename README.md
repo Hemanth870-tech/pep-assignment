@@ -112,3 +112,23 @@ def student_list(request):
 app/serializer.py
 
 added one line at bottom: fields = '__all__'
+
+# ASSIGNMENT 4:
+![alt text](image-5.png)
+
+app/serailzers.py
+
+from rest_framework import serializers
+from .models import Student
+
+class StudentSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Student
+        fields = '__all__'
+
+    def validate_age(self, value):
+        if value <= 5:
+            raise serializers.ValidationError("Age must be greater than 5")
+        return value
+
