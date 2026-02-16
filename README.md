@@ -132,3 +132,74 @@ class StudentSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("Age must be greater than 5")
         return value
 
+# ASSIGNMENT 5:
+![alt text](<Screenshot 2026-02-14 115145.png>)
+
+1. my-profile/polls/views.py
+
+@csrf_exempt
+def submit_contact(request):
+    if request.method == 'POST':
+        # Get form data
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        message_text = request.POST.get('message')
+        
+        # Save to database
+        contact = ContactMessage.objects.create(
+            name=name,
+            email=email,
+            message=message_text
+        )
+ Hello {name},
+
+Thank you for contacting me! I've received your message and will get back to you shortly.
+
+Your message: "{message_text}"
+
+Connect with me:
+- Docker Hub: https://hub.docker.com/u/heamnth345 (97+ pulls! ⭐)
+- GitHub: https://github.com/Hemanth870-tech
+- LinkedIn: https://linkedin.com/in/hemanth-issai
+
+Best regards,
+Hemanth Issai
+Cloud & DevOps Engineer
+        """
+        
+        try:
+            send_mail(
+                subject=subject,
+                message=plain_message,
+                html_message=html_message,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[email],
+                fail_silently=False,
+            )
+            email_status = "sent"
+        except Exception as e:
+            print(f"Email error: {e}")
+            email_status = "failed"
+        
+        # Return success response
+        return JsonResponse({
+            'success': True,
+            'message': 'Message sent successfully! Check your email for confirmation.',
+            'email_status': email_status
+        })
+    
+    return JsonResponse({
+        'success': False,
+        'message': 'Invalid request'
+    })
+
+2. my-profile/settings.py
+
+STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = '**********@gmail.com'  # Your Gmail
+EMAIL_HOST_PASSWORD = '************'  # Your App Password
