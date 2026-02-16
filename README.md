@@ -134,6 +134,8 @@ class StudentSerializer(serializers.ModelSerializer):
 
 # ASSIGNMENT 5:
 <img width="1920" height="1008" alt="image" src="https://github.com/user-attachments/assets/e560e41a-fbd2-4ae8-bdbc-f300c0a6befd" />
+<img width="1920" height="1008" alt="Screenshot 2026-02-14 115041" src="https://github.com/user-attachments/assets/852e2c50-f774-45bc-8b0d-b248359761fd" />
+
 
 
 ![alt text](<Screenshot 2026-02-14 115145.png>)
